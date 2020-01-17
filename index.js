@@ -2,15 +2,13 @@ const method = require('./generateHTML')
 const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer")
-
-
 var pdf = require('html-pdf');
-// var html = fs.readFileSync('./test/businesscard.html', 'utf8');
+
 var options = { format: 'Letter' };
 const questions = [
     {
         type: "input",
-        name: "name",
+        name: "username",
         message: "What is your gitHub Username?"
     },
     {
@@ -27,24 +25,38 @@ const questions = [
 // console.log(newPage)
 inquirer
     .prompt(questions)
-    .then(function({color,name}){
+    .then(function({color,username}){
         const newPage = method.generateHTML(color)
         // console.log(newPage)
         axios
-        .get( `https://api.github.com/users/${name}`)
-        .then(({data})=> console.log(data))
+        .get( `https://api.github.com/users/${username}`)
+        .then(({data})=> {
+            let name = data.name
+            let imgSrc = data.avatar_url
+            let email = data.blog
+            let repos = data.public_repos
+            let followers = data.followers
+            let following = data.following
+            let bio = data.bio
+            let gitHub = data.html_url
+
+            let html = method.generateHTML(color,name,imgSrc,bio,gitHub,email,repos,followers,following)
+
+            pdf.create(html, options).toFile('./HTML.pdf', function(err, res) {
+                if (err) return console.log(err);
+                console.log(res); 
+              });
+        }
         
-    })
+    )
    
   
 
 
 
 
-function writeToFile(fileName, data) {
+
 
 }
 
-function init() {
-
-    init();}
+    )

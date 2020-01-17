@@ -2,35 +2,35 @@
 
 
 
- var generateHTML =
-  function generateHTML(data) {
-  var colors = {
-    green: {
-      wrapperBackground: "#E6E1C3",
-      headerBackground: "#C1C72C",
-      headerColor: "black",
-      photoBorderColor: "#black"
-    },
-    blue: {
-      wrapperBackground: "#5F64D3",
-      headerBackground: "#26175A",
-      headerColor: "white",
-      photoBorderColor: "#73448C"
-    },
-    pink: {
-      wrapperBackground: "#879CDF",
-      headerBackground: "#FF8374",
-      headerColor: "white",
-      photoBorderColor: "#FEE24C"
-    },
-    red: {
-      wrapperBackground: "#DE9967",
-      headerBackground: "#870603",
-      headerColor: "white",
-      photoBorderColor: "white"
+var generateHTML =
+  function generateHTML(data, name, imgSrc, bio, gitHub, email, repos, followers, following) {
+    var colors = {
+      green: {
+        wrapperBackground: "#E6E1C3",
+        headerBackground: "#C1C72C",
+        headerColor: "black",
+        photoBorderColor: "#black"
+      },
+      blue: {
+        wrapperBackground: "#5F64D3",
+        headerBackground: "#26175A",
+        headerColor: "white",
+        photoBorderColor: "#73448C"
+      },
+      pink: {
+        wrapperBackground: "#879CDF",
+        headerBackground: "#FF8374",
+        headerColor: "white",
+        photoBorderColor: "#FEE24C"
+      },
+      red: {
+        wrapperBackground: "#DE9967",
+        headerBackground: "#870603",
+        headerColor: "white",
+        photoBorderColor: "white"
+      }
     }
-  }
-  return `<!DOCTYPE html>
+    return `<!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="UTF-8" />
@@ -174,16 +174,70 @@
             zoom: .75; 
           } 
          }
-      </style><body>
-      <div class="container wrapper">
-          <div class="row">
-              <div class="col "><h1>TEST</h1></div>
+      </style></head>
+      <body>
+  <div class="container wrapper">
+    <div class="row">
+      <div class="col photo-header ">
+        <img src="${imgSrc}" class="photo-header">
+        <br>
       </div>
-      
-  </body> 
+    </div>
+    <div class="row">
+      <div class="col  ">
+        <h1 class="photo-header">Hello my Name is ${name}</h1>
+
+      </div>
+    </div>
+    <div class="row">
+
+    </div>
+    <main>
+
+      <div class="row">
+        <div class="col link-nav"><a class="link-nav" href="${gitHub}">GitHub</a></div>
+        <div class="col">
+          <h3>${bio}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col  ">
+          <div class="card">
+            <h3>Repo Count</h3>
+            <h4>${repos}</h4>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <h3>Followers</h3>
+            <h4>${followers}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <h3>Following</h3>
+            <h4>${following}</h4>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <h3>Stars</h3>
+            <h4>${followers}</h4>
+          </div>
+        </div>
+      </div>
+
+
+    </main>
+
+  </div>>
+</body>
   </html>`
-      
-        }
+
+  }
 
 
-        module.exports = {generateHTML}
+module.exports = { generateHTML }
