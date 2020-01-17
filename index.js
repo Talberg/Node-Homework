@@ -39,13 +39,20 @@ inquirer
             let following = data.following
             let bio = data.bio
             let gitHub = data.html_url
+            axios.get(`https://api.github.com/users/${username}/starred`)
+            .then(({data})=>{
+                let star = data.length
+                 let html = method.generateHTML(color,name,imgSrc,bio,gitHub,email,repos,followers,following,star)
 
-            let html = method.generateHTML(color,name,imgSrc,bio,gitHub,email,repos,followers,following)
-
-            pdf.create(html, options).toFile('./HTML.pdf', function(err, res) {
+                  pdf.create(html, options).toFile('./HTML.pdf', function(err, res) {
                 if (err) return console.log(err);
                 console.log(res); 
               });
+            })
+
+           
+
+           
         }
         
     )
